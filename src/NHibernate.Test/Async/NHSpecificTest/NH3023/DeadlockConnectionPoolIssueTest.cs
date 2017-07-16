@@ -75,6 +75,13 @@ namespace NHibernate.Test.NHSpecificTest.NH3023
 		[Theory]
 		public async Task ConnectionPoolCorruptionAfterDeadlockAsync(bool distributed, bool disposeSessionBeforeScope)
 		{
+			if (distributed)
+			{
+#if NETCOREAPP2_0
+				Assert.Ignore("This platform does not support distributed transactions.");
+#endif
+			}
+
 			var tryCount = 0;
 			var id = 1;
 			do

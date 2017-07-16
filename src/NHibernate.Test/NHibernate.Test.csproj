@@ -33,8 +33,10 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
     <Compile Remove="NHSpecificTest\NH2484\**" /> <!--Uses Image type-->
     <Compile Remove="NHSpecificTest\NH3121\**" /> <!--Uses Image type-->
+    <Compile Remove="SystemTransactions\**" /> <!--Uses Ambient transactions-->
     <Compile Remove="Async\NHSpecificTest\NH2484\**" /> <!--Uses Image type-->
     <Compile Remove="Async\NHSpecificTest\NH3121\**" /> <!--Uses Image type-->
+    <Compile Remove="Async\SystemTransactions\**" /> <!--Uses Ambient transactions-->
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\NHibernate.DomainModel\ABC.hbm.xml" Link="ABC.hbm.xml">
