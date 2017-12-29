@@ -6,22 +6,26 @@ namespace NHibernate.Test
 	{
 		public static bool IsOdbcDriver(this IDriver driver)
 		{
-			return (driver is OdbcDriver);
+			if (driver is OdbcDriver) return true;
+			return false;
 		}
 
 		public static bool IsOdbcDriver(this System.Type driverClass)
 		{
-			return typeof(OdbcDriver).IsAssignableFrom(driverClass);
+			if (typeof(OdbcDriver).IsAssignableFrom(driverClass)) return true;
+			return false;
 		}
 
 		public static bool IsOleDbDriver(this IDriver driver)
 		{
-			return (driver is OleDbDriver);
+			if (driver is OleDbDriver) return true;
+			return false;
 		}
 
 		public static bool IsOleDbDriver(this System.Type driverClass)
 		{
-			return typeof(OleDbDriver).IsAssignableFrom(driverClass);
+			if (typeof(OleDbDriver).IsAssignableFrom(driverClass)) return true;
+			return false;
 		}
 
 		/// <summary>
@@ -30,9 +34,10 @@ namespace NHibernate.Test
 		public static bool IsSqlServerDriver(this IDriver driver)
 		{
 #pragma warning disable 618
-			return (driver is SqlClientDriver) 
+			if (driver is SqlClientDriver) return true;
 #pragma warning restore 618
-				|| (driver is SqlServer2000Driver);
+			if (driver is SqlServer2000Driver) return true;
+			return false;
 		}
 
 		/// <summary>
@@ -41,34 +46,38 @@ namespace NHibernate.Test
 		public static bool IsSqlServerDriver(this System.Type driverClass)
 		{
 #pragma warning disable 618
-			return typeof(SqlClientDriver).IsAssignableFrom(driverClass)
+			if (typeof(SqlClientDriver).IsAssignableFrom(driverClass)) return true;
 #pragma warning restore 618
-				|| typeof(SqlServer2000Driver).IsAssignableFrom(driverClass);
+			if (typeof(SqlServer2000Driver).IsAssignableFrom(driverClass)) return true;
+			return false;
 		}
 
 		public static bool IsSqlServer2008Driver(this IDriver driver)
 		{
 #pragma warning disable 618
-			return (driver is Sql2008ClientDriver)
+			if (driver is Sql2008ClientDriver) return true;
 #pragma warning restore 618
-				|| (driver is SqlServer2008Driver);
+			if (driver is SqlServer2008Driver) return true;
+			return false;
 		}
 
 		public static bool IsMySqlDriver(this System.Type driverClass)
 		{
 #pragma warning disable 618
-			return typeof(MySqlDataDriver).IsAssignableFrom(driverClass)
+			if (typeof(MySqlDataDriver).IsAssignableFrom(driverClass)) return true;
 #pragma warning restore 618
-				|| typeof(MySqlDriver).IsAssignableFrom(driverClass);
+			if (typeof(MySqlDriver).IsAssignableFrom(driverClass)) return true;
+			return false;
 		}
 
 
 		public static bool IsFirebirdDriver(this IDriver driver)
 		{
 #pragma warning disable 618
-			return (driver is FirebirdClientDriver)
+			if (driver is FirebirdClientDriver) return true;
 #pragma warning restore 618
-				|| (driver is FirebirdDriver);
+			if (driver is FirebirdDriver) return true;
+			return false;
 		}
 
 		/// <summary>
@@ -97,25 +106,29 @@ namespace NHibernate.Test
 
 		public static bool IsOracleDataClientDriver(this IDriver driver)
 		{
-			return (driver is OracleDataClientDriver);
+			if (driver is OracleDataClientDriver) return true;
+			return false;
 		}
 
 		public static bool IsOracleDataClientDriver(this System.Type driverClass)
 		{
-			return typeof(OracleDataClientDriver).IsAssignableFrom(driverClass);
+			if (typeof(OracleDataClientDriver).IsAssignableFrom(driverClass)) return true;
+			return false;
 		}
 
 		public static bool IsOracleLiteDataClientDriver(this IDriver driver)
 		{
-			return (driver is OracleLiteDataClientDriver);
+			if (driver is OracleLiteDataClientDriver) return true;
+			return false;
 		}
 
 		public static bool IsOracleManagedDriver(this IDriver driver)
 		{
 #pragma warning disable 618
-            return (driver is OracleManagedDataClientDriver)
+            if (driver is OracleManagedDataClientDriver) return true;
 #pragma warning restore 618
-				|| (driver is OracleManagedDriver);
+			if (driver is OracleManagedDriver) return true;
+			return false;
 		}
 	}
 }
