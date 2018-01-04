@@ -31,9 +31,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <Compile Remove="DriverTest\ObsoleteDriverFixture.cs" /> <!--Uses removed driver classes-->
     <Compile Remove="NHSpecificTest\NH2484\**" /> <!--Uses Image type-->
     <Compile Remove="NHSpecificTest\NH3121\**" /> <!--Uses Image type-->
     <Compile Remove="SystemTransactions\**" /> <!--Uses Ambient transactions-->
+    <Compile Remove="Async\DriverTest\ObsoleteDriverFixture.cs" /> <!--Uses removed driver classes-->
     <Compile Remove="Async\NHSpecificTest\NH2484\**" /> <!--Uses Image type-->
     <Compile Remove="Async\NHSpecificTest\NH3121\**" /> <!--Uses Image type-->
     <Compile Remove="Async\SystemTransactions\**" /> <!--Uses Ambient transactions-->
