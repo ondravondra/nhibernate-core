@@ -6,6 +6,7 @@ using NHibernate.Connection;
 using NHibernate.Dialect;
 using NHibernate.DomainModel;
 using NHibernate.Driver;
+using NHibernate.Util;
 using NUnit.Framework;
 
 namespace NHibernate.Test.DriverTest
@@ -25,7 +26,8 @@ namespace NHibernate.Test.DriverTest
 				case MySQLDialect _:
 				case PostgreSQLDialect _:
 				case SQLiteDialect _:
-					return true;
+					System.Type driverType = ReflectHelper.ClassForName(cfg.GetProperty(Cfg.Environment.ConnectionDriver));
+					return !(driverType.IsOdbcDriver() || driverType.IsOleDbDriver());
 				default:
 					return false;
 			}
@@ -34,6 +36,14 @@ namespace NHibernate.Test.DriverTest
 		protected override void Configure(Configuration configuration)
 		{
 			base.Configure(configuration);
+
+			System.Type driverType = ReflectHelper.ClassForName(cfg.GetProperty(Cfg.Environment.ConnectionDriver));
+			if (driverType.IsOdbcDriver() || driverType.IsOleDbDriver())
+			{
+				// ODBC and OLE DB drivers are not obsoleted, do not switch it.
+				return;
+			}
+
 			var dialect = NHibernate.Dialect.Dialect.GetDialect(configuration.Properties);
 			System.Type driver;
 			switch (dialect)
