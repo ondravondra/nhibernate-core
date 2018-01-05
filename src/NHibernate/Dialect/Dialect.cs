@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -48,6 +49,7 @@ namespace NHibernate.Dialect
 		private readonly IDictionary<string, ISQLFunction> _sqlFunctions;
 
 		private static readonly IDictionary<string, ISQLFunction> StandardAggregateFunctions = CollectionHelper.CreateCaseInsensitiveHashtable<ISQLFunction>();
+		private static readonly ConcurrentDictionary<string, bool> ExternalDriverExistsCache = new ConcurrentDictionary<string, bool>();
 
 		private static readonly IViolatedConstraintNameExtracter Extracter;
 
@@ -2397,7 +2399,7 @@ namespace NHibernate.Dialect
 
 		internal static string GetDriverName<TFallback>(string preferredName) where TFallback : IDriver
 		{
-			return ReflectHelper.ClassForFullNameOrNull(preferredName) == null
+			return ExternalDriverExistsCache.GetOrAdd(preferredName, s => ReflectHelper.ClassForFullNameOrNull(s) == null)
 				? typeof(TFallback).FullName
 				: preferredName;
 		}
